@@ -7,7 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.util.List;
 
 @Entity(name = "players")
-@Table(schema = "jpa")
+@Table
 @NoArgsConstructor
 @DynamicUpdate
 public class Player {
@@ -22,10 +22,10 @@ public class Player {
     private String playerState;
     private int playerHandicap;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "players_teams", schema = "jpa")
-    private List<Team> teamList;
-    @ManyToMany(mappedBy = "playerList", fetch = FetchType.LAZY)
-    private List<Match> singlesMatchList;
+    @JoinTable(name = "players_teams")
+    private List<Team> teams;
+    @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
+    private List<Match> singlesMatches;
     private String passwordHash;
     private String role;
 
@@ -121,19 +121,19 @@ public class Player {
         this.role = role;
     }
 
-    public List<Team> getTeamList() {
-        return teamList;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setTeamList(List<Team> teamList) {
-        this.teamList = teamList;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
-    public List<Match> getSinglesMatchList() {
-        return singlesMatchList;
+    public List<Match> getSinglesMatches() {
+        return singlesMatches;
     }
 
-    public void setSinglesMatchList(List<Match> singlesMatchList) {
-        this.singlesMatchList = singlesMatchList;
+    public void setSinglesMatches(List<Match> singlesMatches) {
+        this.singlesMatches = singlesMatches;
     }
 }

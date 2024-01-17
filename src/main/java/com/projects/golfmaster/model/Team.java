@@ -7,17 +7,17 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.util.List;
 
 @Entity(name = "teams")
-@Table(schema = "jpa")
+@Table
 @NoArgsConstructor
 @DynamicUpdate
 public class Team {
 
     @Id
     private String teamName;
-    @ManyToMany(mappedBy = "teamList", fetch = FetchType.LAZY)
-    private List<Player> playerList;
-    @ManyToMany(mappedBy = "teamList", fetch = FetchType.LAZY)
-    private List<Match> matchList;
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+    private List<Player> players;
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+    private List<Match> matches;
 
 
 
@@ -37,19 +37,19 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public List<Match> getMatchList() {
-        return matchList;
+    public List<Match> getMatches() {
+        return matches;
     }
 
-    public void setMatchList(List<Match> matchList) {
-        this.matchList = matchList;
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
-    public List<Player> getPlayerList() {
-        return playerList;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setPlayerList(List<Player> playerList) {
-        this.playerList = playerList;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

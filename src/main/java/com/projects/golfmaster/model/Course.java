@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity(name = "courses")
-@Table(schema = "jpa")
+@Table
 @NoArgsConstructor
 @DynamicUpdate
 public class Course {

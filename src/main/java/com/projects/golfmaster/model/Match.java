@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "matches")
-@Table(schema = "jpa")
+@Table
 @NoArgsConstructor
 @DynamicUpdate
 public class Match {
@@ -21,11 +21,11 @@ public class Match {
     @JoinColumn(name = "round_id")
     private Round round;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "matches_teams", schema = "jpa")
-    private List<Team> teamList;
+    @JoinTable(name = "matches_teams")
+    private List<Team> teams;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "matches_players", schema = "jpa")
-    private List<Player> playerList;
+    @JoinTable(name = "matches_players")
+    private List<Player> players;
 
     //Getters and Setters
 
@@ -49,19 +49,19 @@ public class Match {
         this.round = round;
     }
 
-    public List<Team> getTeamsList() {
-        return teamList;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setTeamsList(List<Team> teamsList) {
-        this.teamList = teamsList;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
-    public List<Player> getPlayersList() {
-        return playerList;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setPlayersList(List<Player> playersList) {
-        this.playerList = playersList;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

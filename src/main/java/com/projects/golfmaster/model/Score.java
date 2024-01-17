@@ -7,7 +7,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.util.UUID;
 
 @Entity(name = "scores")
-@Table(schema = "jpa")
+@Table
 @NoArgsConstructor
 @DynamicUpdate
 public class Score {
