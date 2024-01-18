@@ -1,6 +1,6 @@
 package com.projects.golfmaster.service;
 
-import com.projects.golfmaster.exception.PlayerNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Player;
 import com.projects.golfmaster.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,16 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
-    public Player getPlayerById(String playerId) throws PlayerNotFoundException {
+    public Player getPlayerById(String playerId) throws NotFoundException {
         Optional<Player> retrievedPlayer = playerRepository.findById(playerId);
-        return retrievedPlayer.orElseThrow(() -> new PlayerNotFoundException("Player not Found"));
+        return retrievedPlayer.orElseThrow(() -> new NotFoundException("Player not Found"));
     }
 
     public Player createPlayer(Player player) {
         return playerRepository.save(player);
     }
 
-    public Player updatePlayer(String playerId, Player updatedPlayer) throws PlayerNotFoundException {
+    public Player updatePlayer(String playerId, Player updatedPlayer) throws NotFoundException {
         Optional<Player> potentialPlayer = playerRepository.findById(playerId);
         if (potentialPlayer.isPresent()){
             Player existingPlayer = potentialPlayer.get();
@@ -44,7 +44,7 @@ public class PlayerService {
             existingPlayer.setRole(updatedPlayer.getRole());
             return playerRepository.save(existingPlayer);
         } else {
-            throw new PlayerNotFoundException("Player not Found");
+            throw new NotFoundException("Player not Found");
         }
     }
 }

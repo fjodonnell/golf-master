@@ -1,5 +1,7 @@
 package com.projects.golfmaster.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,7 +16,9 @@ public class Team {
 
     @Id
     private String teamName;
-    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "teams_players")
+    @JsonIgnoreProperties("teams")
     private List<Player> players;
     @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
     private List<Match> matches;

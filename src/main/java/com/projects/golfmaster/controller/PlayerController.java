@@ -1,6 +1,6 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.PlayerNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Player;
 import com.projects.golfmaster.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class PlayerController implements PlayerOperations{
     }
 
     @Override
-    public Player getPlayerById(String playerId) throws PlayerNotFoundException {
+    public Player getPlayerById(String playerId) throws NotFoundException {
         return playerService.getPlayerById(playerId);
     }
 
@@ -30,7 +30,7 @@ public class PlayerController implements PlayerOperations{
     }
 
     @Override
-    public Player updatePlayer(String playerId, Player updatedPlayer) throws PlayerNotFoundException {
+    public Player updatePlayer(String playerId, Player updatedPlayer) throws NotFoundException {
         return playerService.updatePlayer(playerId, updatedPlayer);
     }
 }

@@ -1,6 +1,6 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.MatchNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Match;
 import com.projects.golfmaster.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class MatchController implements MatchOperations{
     }
 
     @Override
-    public Match getMatchById(UUID matchId) throws MatchNotFoundException {
+    public Match getMatchById(UUID matchId) throws NotFoundException {
         return matchService.getMatchById(matchId);
     }
 

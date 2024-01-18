@@ -1,6 +1,7 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.CourseNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Course;
 import com.projects.golfmaster.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CourseController implements CourseOperations{
     }
 
     @Override
-    public Course getCourseByName(String courseName) throws CourseNotFoundException {
+    public Course getCourseByName(String courseName) throws NotFoundException {
         return courseService.getCourseByName(courseName);
     }
 
@@ -30,7 +31,7 @@ public class CourseController implements CourseOperations{
     }
 
     @Override
-    public Course updateCourse(String courseName, Course course) throws CourseNotFoundException {
+    public Course updateCourse(String courseName, Course course) throws NotFoundException {
         return courseService.updateCourse(courseName, course);
     }
 }

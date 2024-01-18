@@ -1,6 +1,6 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.EventNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Event;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +13,11 @@ public interface EventOperations {
     List<Event> getAllEvents();
 
     @GetMapping("/{eventName}")
-    Event getEventByName(@PathVariable String eventName) throws EventNotFoundException;
+    Event getEventByName(@PathVariable String eventName) throws NotFoundException;
 
     @PostMapping("/create")
     Event createEvent(@RequestBody Event event);
 
     @PutMapping("/{eventName}")
-    Event updateEvent(@PathVariable String eventName, @RequestBody Event eventToUpdate) throws EventNotFoundException;
+    Event updateEvent(@PathVariable String eventName, @RequestBody Event eventToUpdate) throws NotFoundException;
 }

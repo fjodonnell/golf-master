@@ -1,6 +1,6 @@
 package com.projects.golfmaster.service;
 
-import com.projects.golfmaster.exception.CourseNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Course;
 import com.projects.golfmaster.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,16 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Course getCourseByName(String courseName) throws CourseNotFoundException {
+    public Course getCourseByName(String courseName) throws NotFoundException {
         Optional<Course> retrievedCourse = courseRepository.findById(courseName);
-        return retrievedCourse.orElseThrow(() -> new CourseNotFoundException("Course not Found"));
+        return retrievedCourse.orElseThrow(() -> new NotFoundException("Course not Found"));
     }
 
     public Course createCourse(Course course) {
         return courseRepository.save(course);
     }
 
-    public Course updateCourse(String courseName, Course course) throws CourseNotFoundException {
+    public Course updateCourse(String courseName, Course course) throws NotFoundException {
         Optional<Course> retrievedCourse = courseRepository.findById(courseName);
         if (retrievedCourse.isPresent()) {
             Course existingCourse = retrievedCourse.get();
@@ -37,7 +37,7 @@ public class CourseService {
             existingCourse.setCourseState(course.getCourseState());
             return courseRepository.save(existingCourse);
         } else {
-            throw new CourseNotFoundException("Course not Found");
+            throw new NotFoundException("Course not Found");
         }
     }
 

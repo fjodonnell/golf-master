@@ -1,6 +1,6 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.MatchNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Match;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ public interface MatchOperations {
     List<Match> getAllMatches();
 
     @GetMapping("/{matchId}")
-    Match getMatchById(@PathVariable UUID matchId) throws MatchNotFoundException;
+    Match getMatchById(@PathVariable UUID matchId) throws NotFoundException;
 
 //    @GetMapping("/{matchTeamWinner}")
 //    List<Match> getMatchesWonByTeam(@PathVariable String teamName) throws MatchNotFoundException;
@@ -23,5 +23,5 @@ public interface MatchOperations {
     Match createMatch(@RequestBody Match match);
 
 //    @PutMapping("/{matchId}")
-//    Match updateMatch(@PathVariable UUID matchId, @RequestBody Match match) throws MatchNotFoundException;
+//    Match updateMatch(@PathVariable UUID matchId, @RequestBody Match match) throws NotFoundException;
 }

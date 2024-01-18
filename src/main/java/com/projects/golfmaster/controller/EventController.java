@@ -1,6 +1,6 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.EventNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Event;
 import com.projects.golfmaster.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class EventController implements EventOperations{
     }
 
     @Override
-    public Event getEventByName(String eventName) throws EventNotFoundException {
+    public Event getEventByName(String eventName) throws NotFoundException {
         return eventService.getEventByName(eventName);
     }
 
@@ -30,7 +30,7 @@ public class EventController implements EventOperations{
     }
 
     @Override
-    public Event updateEvent(String eventName, Event eventToUpdate) throws EventNotFoundException{
+    public Event updateEvent(String eventName, Event eventToUpdate) throws NotFoundException{
         return eventService.updateEvent(eventName, eventToUpdate);
     }
 }

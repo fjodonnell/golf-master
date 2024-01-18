@@ -1,6 +1,6 @@
 package com.projects.golfmaster.service;
 
-import com.projects.golfmaster.exception.MatchNotFoundException;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Match;
 import com.projects.golfmaster.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,12 @@ public class MatchService {
     MatchRepository matchRepository;
 
     public List<Match> getAllMatches() {
-        List<Match> list = matchRepository.findAll();
-        return list;
+        return matchRepository.findAll();
     }
 
-    public Match getMatchById(UUID matchId) throws MatchNotFoundException {
+    public Match getMatchById(UUID matchId) throws NotFoundException {
         Optional<Match> retrievedMatch = matchRepository.findById(matchId);
-        return retrievedMatch.orElseThrow(() -> new MatchNotFoundException("Match not Found"));
+        return retrievedMatch.orElseThrow(() -> new NotFoundException("Match not Found"));
     }
 
 //    public List<Match> getMatchesWonByTeam(String teamName) throws MatchNotFoundException {
