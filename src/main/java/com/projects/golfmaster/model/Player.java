@@ -12,6 +12,7 @@ import java.util.List;
 @Table
 @NoArgsConstructor
 @DynamicUpdate
+@JsonIgnoreProperties("singlesMatches")
 public class Player {
 
     @Id
@@ -24,7 +25,7 @@ public class Player {
     private String playerState;
     private int playerHandicap;
     @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("players")
+    @JsonIgnoreProperties({"players", "matches"})
     private List<Team> teams;
     @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
     private List<Match> singlesMatches;

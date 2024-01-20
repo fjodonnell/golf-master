@@ -13,11 +13,11 @@ public interface MatchOperations {
     @GetMapping("/")
     List<Match> getAllMatches();
 
-    @GetMapping("/{matchId}")
+    @GetMapping("/matchId/{matchId}")
     Match getMatchById(@PathVariable UUID matchId) throws NotFoundException;
 
-//    @GetMapping("/{matchTeamWinner}")
-//    List<Match> getMatchesWonByTeam(@PathVariable String teamName) throws MatchNotFoundException;
+    @GetMapping("/teamWinner/{teamName}")
+    List<Match> getMatchesWonByTeam(@PathVariable String teamName) throws NotFoundException;
 
     @PostMapping("/create")
     Match createMatch(@RequestBody Match match);

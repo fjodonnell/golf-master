@@ -25,10 +25,10 @@ public class MatchService {
         return retrievedMatch.orElseThrow(() -> new NotFoundException("Match not Found"));
     }
 
-//    public List<Match> getMatchesWonByTeam(String teamName) throws MatchNotFoundException {
-//        Optional<List<Match>> retrievedMatches = matchRepository.findByMatchTeamWinner(teamName);
-//        return retrievedMatches.orElseThrow(() -> new MatchNotFoundException("Your team has not won any matches"));
-//    }
+    public List<Match> getMatchesWonByTeam(String teamName) throws NotFoundException {
+        Optional<List<Match>> retrievedMatches = matchRepository.findByTeamWinner_TeamName(teamName);
+        return retrievedMatches.orElseThrow(() -> new NotFoundException("Your team has not won any matches"));
+    }
 
     public Match createMatch(Match match) {
         return matchRepository.save(match);

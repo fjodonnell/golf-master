@@ -12,6 +12,7 @@ import java.util.List;
 @Table
 @NoArgsConstructor
 @DynamicUpdate
+//@JsonIgnoreProperties("matches")
 public class Team {
 
     @Id
@@ -21,6 +22,7 @@ public class Team {
     @JsonIgnoreProperties("teams")
     private List<Player> players;
     @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("teams")
     private List<Match> matches;
 
 
