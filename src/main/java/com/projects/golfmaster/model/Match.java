@@ -1,5 +1,6 @@
 package com.projects.golfmaster.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -17,26 +18,32 @@ public class Match {
     @GeneratedValue(strategy=GenerationType.UUID)
     private UUID matchId;
     private String matchName;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "round_id")
     private Round round;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "matches_teams")
+    @JsonIgnoreProperties({"players", "matches"})
     private List<Team> teams;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "matches_players")
+    @JsonIgnoreProperties({"teams", "singlesMatches"})
     private List<Player> players;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team_winner")
+    @JsonIgnoreProperties({"players", "matches"})
     private Team teamWinner;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team_loser")
+    @JsonIgnoreProperties({"players", "matches"})
     private Team teamLoser;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_winner")
+    @JsonIgnoreProperties({"teams", "singlesMatches"})
     private Player playerWinner;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_loser")
+    @JsonIgnoreProperties({"teams", "singlesMatches"})
     private Player playerLoser;
 
     //Getters and Setters

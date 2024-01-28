@@ -1,5 +1,7 @@
 package com.projects.golfmaster.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,16 +17,18 @@ public class Score {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
     private UUID scoreId;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Integer score;
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "player_id")
+    @JsonIncludeProperties("playerId")
     private Player player;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "match_id")
+    @JsonIncludeProperties({"matchId", "matchName"})
     private Match match;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "round_id")
     private Round round;
-    private Integer score;
 
     //Getters and Setters
 

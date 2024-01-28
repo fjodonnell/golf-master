@@ -22,6 +22,6 @@ public interface MatchOperations {
     @PostMapping("/create")
     Match createMatch(@RequestBody Match match);
 
-//    @PutMapping("/{matchId}")
-//    Match updateMatch(@PathVariable UUID matchId, @RequestBody Match match) throws NotFoundException;
+    @PutMapping("/{matchId}")
+    Match updateMatch(@PathVariable UUID matchId, @RequestBody Match match) throws NotFoundException;
 }

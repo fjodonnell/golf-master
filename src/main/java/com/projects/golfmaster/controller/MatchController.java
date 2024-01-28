@@ -35,8 +35,8 @@ public class MatchController implements MatchOperations{
         return matchService.createMatch(match);
     }
 
-//    @Override
-//    public Match updateMatch(UUID matchId, Match match) throws MatchNotFoundException {
-//        return matchService.updateMatch(matchId, match);
-//    }
+    @Override
+    public Match updateMatch(UUID matchId, Match match) throws NotFoundException {
+        return matchService.updateMatch(matchId, match);
+    }
 }

@@ -1,9 +1,11 @@
 package com.projects.golfmaster.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "rounds")
@@ -16,10 +18,10 @@ public class Round {
     @GeneratedValue(strategy=GenerationType.UUID)
     private UUID roundId;
     private String roundName;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_name")
     private Event event;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_name")
     private Course course;
 
@@ -43,5 +45,13 @@ public class Round {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String getRoundName() {
+        return roundName;
+    }
+
+    public void setRoundName(String roundName) {
+        this.roundName = roundName;
     }
 }

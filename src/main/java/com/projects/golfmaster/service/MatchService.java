@@ -34,24 +34,21 @@ public class MatchService {
         return matchRepository.save(match);
     }
 
-//    public Match updateMatch(UUID matchId, Match match) throws MatchNotFoundException {
-//        Optional<Match> retrievedMatch = matchRepository.findById(matchId);
-//        if (retrievedMatch.isPresent()) {
-//            Match existingMatch = retrievedMatch.get();
-//            existingMatch.setMatchName(match.getMatchName());
-//            existingMatch.setRound(match.getRound());
-//            existingMatch.setMatchTeamOne(match.getMatchTeamOne());
-//            existingMatch.setMatchTeamTwo(match.getMatchTeamTwo());
-//            existingMatch.setMatchPlayerOne(match.getMatchPlayerOne());
-//            existingMatch.setMatchPlayerTwo(match.getMatchPlayerTwo());
-//            existingMatch.setMatchTeamWinner(match.getMatchTeamWinner());
-//            existingMatch.setMatchTeamLoser(match.getMatchTeamLoser());
-//            existingMatch.setMatchPlayerWinner(match.getMatchPlayerWinner());
-//            existingMatch.setMatchPlayerWinner(match.getMatchPlayerWinner());
-//            existingMatch.setMatchScore(match.getMatchScore());
-//            return matchRepository.save(existingMatch);
-//        } else {
-//            throw new MatchNotFoundException("Match not found");
-//        }
-//    }
+    public Match updateMatch(UUID matchId, Match match) throws NotFoundException {
+        Optional<Match> retrievedMatch = matchRepository.findById(matchId);
+        if (retrievedMatch.isPresent()) {
+            Match existingMatch = retrievedMatch.get();
+            existingMatch.setMatchName(match.getMatchName());
+            existingMatch.setRound(match.getRound());
+            existingMatch.setTeams(match.getTeams());
+            existingMatch.setPlayers(match.getPlayers());
+            existingMatch.setTeamWinner(match.getTeamWinner());
+            existingMatch.setTeamLoser(match.getTeamLoser());
+            existingMatch.setPlayerWinner(match.getPlayerWinner());
+            existingMatch.setPlayerLoser(match.getPlayerLoser());
+            return matchRepository.save(existingMatch);
+        } else {
+            throw new NotFoundException("The match you are trying to update does not exist");
+        }
+    }
 }
