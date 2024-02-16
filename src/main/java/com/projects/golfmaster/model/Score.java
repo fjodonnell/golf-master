@@ -1,6 +1,5 @@
 package com.projects.golfmaster.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;

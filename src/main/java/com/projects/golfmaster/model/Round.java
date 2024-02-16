@@ -1,11 +1,9 @@
 package com.projects.golfmaster.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "rounds")

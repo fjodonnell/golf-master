@@ -8,10 +8,10 @@ import java.util.List;
 
 @RequestMapping("/player")
 public interface PlayerOperations {
-
+    @CrossOrigin
     @GetMapping("/")
     List<Player> getAllPlayers();
-
+    @CrossOrigin
     @GetMapping("/{playerId}")
     Player getPlayerById(@PathVariable String playerId) throws NotFoundException;
 
