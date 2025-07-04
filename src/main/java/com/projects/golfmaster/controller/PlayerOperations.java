@@ -5,13 +5,11 @@ import com.projects.golfmaster.model.Player;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/player")
 public interface PlayerOperations {
-    @CrossOrigin
     @GetMapping("/")
     List<Player> getAllPlayers();
-    @CrossOrigin
     @GetMapping("/{playerId}")
     Player getPlayerById(@PathVariable String playerId) throws NotFoundException;
 

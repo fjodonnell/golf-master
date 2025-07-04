@@ -3,6 +3,7 @@ package com.projects.golfmaster.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -10,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table
 @NoArgsConstructor
 @DynamicUpdate
+@Data
 public class Course {
 
     @Id
@@ -21,31 +23,5 @@ public class Course {
 
     public Course(String courseName) {
         this.courseName = courseName;
-    }
-
-    //Getters and Setters
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public String getCourseCity() {
-        return courseCity;
-    }
-
-    public void setCourseCity(String courseCity) {
-        this.courseCity = courseCity;
-    }
-
-    public String getCourseState() {
-        return courseState;
-    }
-
-    public void setCourseState(String courseState) {
-        this.courseState = courseState;
     }
 }

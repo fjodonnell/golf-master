@@ -5,7 +5,7 @@ import com.projects.golfmaster.model.Course;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/course")
 public interface CourseOperations {
 

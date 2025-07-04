@@ -5,7 +5,7 @@ import com.projects.golfmaster.model.Event;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/event")
 public interface EventOperations {
 

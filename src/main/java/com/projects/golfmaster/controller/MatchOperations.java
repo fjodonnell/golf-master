@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/match")
 public interface MatchOperations {
 

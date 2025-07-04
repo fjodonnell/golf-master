@@ -1,6 +1,7 @@
 package com.projects.golfmaster.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Table
 @NoArgsConstructor
 @DynamicUpdate
+@Data
 public class Round {
 
     @Id
@@ -23,33 +25,4 @@ public class Round {
     @JoinColumn(name = "course_name")
     private Course course;
 
-    //Getters and Setters
-
-    public UUID getRoundId() {
-        return roundId;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public String getRoundName() {
-        return roundName;
-    }
-
-    public void setRoundName(String roundName) {
-        this.roundName = roundName;
-    }
 }

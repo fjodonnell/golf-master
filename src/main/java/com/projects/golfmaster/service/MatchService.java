@@ -46,6 +46,8 @@ public class MatchService {
             existingMatch.setTeamLoser(match.getTeamLoser());
             existingMatch.setPlayerWinner(match.getPlayerWinner());
             existingMatch.setPlayerLoser(match.getPlayerLoser());
+            existingMatch.setHolesWonBy(match.getHolesWonBy());
+            existingMatch.setHolesRemaining(match.getHolesRemaining());
             return matchRepository.save(existingMatch);
         } else {
             throw new NotFoundException("The match you are trying to update does not exist");

@@ -1,8 +1,8 @@
 package com.projects.golfmaster.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -12,7 +12,8 @@ import java.util.List;
 @Table
 @NoArgsConstructor
 @DynamicUpdate
-//@JsonIgnoreProperties("matches")
+@Data
+@JsonIgnoreProperties("matches")
 public class Team {
 
     @Id
@@ -33,29 +34,4 @@ public class Team {
         this.teamName = teamName;
     }
 
-    //Getters and Setters
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    public List<Match> getMatches() {
-        return matches;
-    }
-
-    public void setMatches(List<Match> matches) {
-        this.matches = matches;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
 }
