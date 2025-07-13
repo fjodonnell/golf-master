@@ -16,4 +16,6 @@ public interface ScoreRepository extends JpaRepository<Score, UUID> {
     Optional<List<Score>> findByRound_RoundId(UUID roundId);
 
     Optional<List<Score>> findByMatch_MatchId(UUID matchId);
+
+    Optional<List<Score>> findByRound_Event_EventName(String eventName);
 }

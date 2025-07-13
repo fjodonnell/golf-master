@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/score")
 public interface ScoreOperations {
 
@@ -24,6 +24,9 @@ public interface ScoreOperations {
 
     @GetMapping("/matchId/{matchId}")
     List<Score> getScoresByMatch(@PathVariable UUID matchId) throws NotFoundException;
+
+    @GetMapping("/eventName/{eventName}")
+    List<Score> getScoresByEvent(@PathVariable String eventName) throws NotFoundException;
 
     @PostMapping("/create")
     Score createScore(@RequestBody Score score);

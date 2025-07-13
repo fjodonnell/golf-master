@@ -18,6 +18,7 @@ public class Round {
     @GeneratedValue(strategy=GenerationType.UUID)
     private UUID roundId;
     private String roundName;
+    private Integer roundNumber;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "event_name")
     private Event event;

@@ -6,6 +6,7 @@ import com.projects.golfmaster.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,6 +41,16 @@ public class ScoreService {
         return retrievedScores.orElseThrow(() -> new NotFoundException("No scores found for the given match"));
     }
 
+    public List<Score> getScoresByEvent(String eventName) throws NotFoundException {
+        Optional<List<Score>> retrievedScores = scoreRepository.findByRound_Event_EventName(eventName);
+        //Unwrap the optional in order to sort
+        List<Score> scores = retrievedScores.orElseThrow(() -> new NotFoundException("No scores found for the given event"));
+        // Sort by Round.roundNumber ascending
+        scores.sort(Comparator.comparingInt(score -> score.getRound().getRoundNumber()));
+        return scores;
+    }
+
+
     public Score createScore(Score score) {
         return scoreRepository.save(score);
     }
@@ -52,6 +63,11 @@ public class ScoreService {
             existingScore.setRound(score.getRound());
             existingScore.setMatch(score.getMatch());
             existingScore.setScore(score.getScore());
+            existingScore.setScoreToPar(score.getScoreToPar());
+            existingScore.setPointsEarned(score.getPointsEarned());
+            existingScore.setPars(score.getPars());
+            existingScore.setBirdies(score.getBirdies());
+            existingScore.setEagles(score.getEagles());
             return scoreRepository.save(existingScore);
         } else {
             throw new NotFoundException("The score you are trying to update does not exist");

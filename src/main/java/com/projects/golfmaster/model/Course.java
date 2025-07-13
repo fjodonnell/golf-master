@@ -18,6 +18,8 @@ public class Course {
     private String courseName;
     private String courseCity;
     private String courseState;
+    private Integer coursePar;
+    private Integer courseLength;
 
     //Constructor
 

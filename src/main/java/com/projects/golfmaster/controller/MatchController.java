@@ -26,6 +26,11 @@ public class MatchController implements MatchOperations{
     }
 
     @Override
+    public List<Match> getMatchesByEvent(String eventName) throws NotFoundException {
+        return matchService.getMatchesByEvent(eventName);
+    }
+
+    @Override
     public List<Match> getMatchesWonByTeam(String teamName) throws NotFoundException {
         return matchService.getMatchesWonByTeam(teamName);
     }

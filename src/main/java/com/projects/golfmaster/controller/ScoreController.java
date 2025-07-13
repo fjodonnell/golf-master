@@ -41,6 +41,11 @@ public class ScoreController implements ScoreOperations {
     }
 
     @Override
+    public List<Score> getScoresByEvent(String eventName) throws NotFoundException {
+        return scoreService.getScoresByEvent(eventName);
+    }
+
+    @Override
     public Score createScore(Score score) {
         return scoreService.createScore(score);
     }

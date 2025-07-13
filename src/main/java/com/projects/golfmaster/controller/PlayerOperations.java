@@ -5,7 +5,7 @@ import com.projects.golfmaster.model.Player;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/player")
 public interface PlayerOperations {
     @GetMapping("/")

@@ -40,6 +40,7 @@ public class RoundService {
         if (retrievedRound.isPresent()) {
             Round existingRound = retrievedRound.get();
             existingRound.setRoundName(round.getRoundName());
+            existingRound.setRoundNumber(round.getRoundNumber());
             existingRound.setCourse(round.getCourse());
             existingRound.setEvent(round.getEvent());
             return roundRepository.save(existingRound);

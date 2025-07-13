@@ -18,4 +18,9 @@ public class LeaderboardController implements LeaderboardOperations {
     public List<LeaderboardItem> getLeaderboardItems() throws NotFoundException {
         return leaderboardService.getLeaderboardItems();
     }
+
+    @Override
+    public List<LeaderboardItem> getTeamLeaderboardItems() throws NotFoundException {
+        return leaderboardService.getTeamLeaderboardItems();
+    }
 }

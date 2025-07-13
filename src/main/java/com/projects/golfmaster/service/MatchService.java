@@ -6,6 +6,7 @@ import com.projects.golfmaster.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +26,15 @@ public class MatchService {
         return retrievedMatch.orElseThrow(() -> new NotFoundException("Match not Found"));
     }
 
+    public List<Match> getMatchesByEvent(String eventName) throws NotFoundException {
+        Optional<List<Match>> retrievedMatches = matchRepository.findByRound_Event_EventName(eventName);
+        //Unwrap the optional in order to sort
+        List<Match> matches = retrievedMatches.orElseThrow(() -> new NotFoundException("No matches found for the given event"));
+        // Sort by Match.matchNumber ascending
+        matches.sort(Comparator.comparingInt(Match::getMatchNumber));
+        return matches;
+    }
+
     public List<Match> getMatchesWonByTeam(String teamName) throws NotFoundException {
         Optional<List<Match>> retrievedMatches = matchRepository.findByTeamWinner_TeamName(teamName);
         return retrievedMatches.orElseThrow(() -> new NotFoundException("Your team has not won any matches"));
@@ -39,6 +49,7 @@ public class MatchService {
         if (retrievedMatch.isPresent()) {
             Match existingMatch = retrievedMatch.get();
             existingMatch.setMatchName(match.getMatchName());
+            existingMatch.setMatchNumber(match.getMatchNumber());
             existingMatch.setRound(match.getRound());
             existingMatch.setTeams(match.getTeams());
             existingMatch.setPlayers(match.getPlayers());

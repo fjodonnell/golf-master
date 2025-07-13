@@ -1,7 +1,6 @@
 package com.projects.golfmaster.controller;
 
 import com.projects.golfmaster.exception.NotFoundException;
-import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Course;
 import com.projects.golfmaster.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;

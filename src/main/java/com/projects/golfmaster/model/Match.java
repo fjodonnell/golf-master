@@ -21,6 +21,7 @@ public class Match {
     @GeneratedValue(strategy=GenerationType.UUID)
     private UUID matchId;
     private String matchName;
+    private Integer matchNumber;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "round_id")
     private Round round;

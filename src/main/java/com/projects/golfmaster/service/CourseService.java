@@ -35,6 +35,8 @@ public class CourseService {
             existingCourse.setCourseName(course.getCourseName());
             existingCourse.setCourseCity(course.getCourseCity());
             existingCourse.setCourseState(course.getCourseState());
+            existingCourse.setCoursePar(course.getCoursePar());
+            existingCourse.setCourseLength(course.getCourseLength());
             return courseRepository.save(existingCourse);
         } else {
             throw new NotFoundException("Course not Found");

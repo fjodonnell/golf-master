@@ -9,7 +9,10 @@ import java.math.BigDecimal;
 @Data
 public class LeaderboardItem {
 
-    private String playerNickname;
+    private String firstName;
+    private String lastName;
+    private String city;
+    private String state;
     private BigDecimal totalPoints;
 
 
