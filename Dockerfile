@@ -12,7 +12,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # STEP 2: Run the app
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # Copy the JAR built in the first stage
