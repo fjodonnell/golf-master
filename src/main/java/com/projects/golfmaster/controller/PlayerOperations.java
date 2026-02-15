@@ -6,7 +6,7 @@ import com.projects.golfmaster.model.Player;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://fjodonnell.github.io/golf-master-react-ui"})
 @RequestMapping("/player")
 public interface PlayerOperations {
     @GetMapping("/")
