@@ -5,7 +5,7 @@ import com.projects.golfmaster.model.Course;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = {"http://localhost:3000", "https://fjodonnell.github.io/golf-master-react-ui"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://fjodonnell.github.io"})
 @RequestMapping("/course")
 public interface CourseOperations {
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-@CrossOrigin(origins = {"http://localhost:3000", "https://fjodonnell.github.io/golf-master-react-ui"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://fjodonnell.github.io"})
 @RequestMapping("/match")
 public interface MatchOperations {
 
