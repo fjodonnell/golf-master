@@ -27,7 +27,7 @@ public class Match {
     private Round round;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "matches_teams")
-    @JsonIgnoreProperties({"players", "matches"})
+    @JsonIgnoreProperties({"matches"})
     private List<Team> teams;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "matches_players")

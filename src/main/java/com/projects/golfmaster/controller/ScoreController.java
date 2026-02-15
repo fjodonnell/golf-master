@@ -1,7 +1,7 @@
 package com.projects.golfmaster.controller;
 
-import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Score;
+import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;

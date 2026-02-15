@@ -1,5 +1,6 @@
 package com.projects.golfmaster.controller;
 
+import com.projects.golfmaster.dto.PlayerSummaryDTO;
 import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Player;
 import org.springframework.web.bind.annotation.*;
@@ -9,9 +10,9 @@ import java.util.List;
 @RequestMapping("/player")
 public interface PlayerOperations {
     @GetMapping("/")
-    List<Player> getAllPlayers();
+    List<PlayerSummaryDTO> getAllPlayers();
     @GetMapping("/{playerId}")
-    Player getPlayerById(@PathVariable String playerId) throws NotFoundException;
+    PlayerSummaryDTO getPlayerById(@PathVariable String playerId) throws NotFoundException;
 
     @PostMapping("/create")
     Player createPlayer(@RequestBody Player player);

@@ -13,33 +13,31 @@ import java.util.List;
 @NoArgsConstructor
 @DynamicUpdate
 @Data
-@JsonIgnoreProperties("singlesMatches")
 public class Player {
 
     @Id
     private String playerId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
     private String playerFirstName;
     private String playerLastName;
     private String playerNickname;
-    private int playerAge;
+    private Integer playerAge;
     private String playerCity;
     private String playerState;
-    private int playerHandicap;
+    private Integer playerHandicap;
     @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"players", "matches"})
     private List<Team> teams;
     @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
     private List<Match> singlesMatches;
-    private String passwordHash;
-    private String role;
 
     //Constructor
 
-    public Player(String playerId, String playerFirstName, String playerLastName, String passwordHash, String role) {
+    public Player(String playerId, String playerFirstName, String playerLastName) {
         this.playerId = playerId;
         this.playerFirstName = playerFirstName;
         this.playerLastName = playerLastName;
-        this.passwordHash = passwordHash;
-        this.role = role;
     }
 }

@@ -50,3 +50,24 @@ alter table if exists scores add constraint FK4akpbasxcjp3h2uind72q1gqm foreign 
 alter table if exists scores add constraint FKs3t291q06nrji21wr6m8n9gvs foreign key (round_id) references rounds;
 alter table if exists teams_players add constraint FK8iqa3ynvxof4qecf8nlpfsiy5 foreign key (players_player_id) references players;
 alter table if exists teams_players add constraint FK5sgep6k6ofdca2f3qjt9o34gg foreign key (teams_team_name) references teams;
+
+
+create table users (
+    id uuid not null,
+    email varchar(255), 
+    password_hash varchar(255),
+    enabled boolean not null default true,
+    created_at timestamp not null default now(),
+    primary key (id));
+
+
+
+    player_age int4 not null, 
+    player_city varchar(255), 
+    player_first_name varchar(255), 
+    player_handicap int4 not null, 
+    player_last_name varchar(255), 
+    player_nickname varchar(255), 
+    player_state varchar(255), 
+    role varchar(255), 
+    primary key (id));

@@ -1,5 +1,6 @@
 package com.projects.golfmaster.service;
 
+import com.projects.golfmaster.dto.PlayerSummaryDTO;
 import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.*;
 import lombok.RequiredArgsConstructor;
@@ -20,28 +21,31 @@ public class LeaderboardService {
 
 
     public List<LeaderboardItem> getLeaderboardItems() throws NotFoundException {
-        List<Player> players = playerService.getAllPlayers();
-        // Temporary code to remove players who are not in the Congressional Cup
+        List<PlayerSummaryDTO> players = playerService.getAllPlayers();
+        // Temporary code to remove players who are not in Tournament du Sol
         players.removeIf(player -> {
-            String id = player.getPlayerId();
+            String id = player.playerId();
             return !id.equals("fjodonnell")
-                    && !id.equals("tfortunato")
-                    && !id.equals("zrobinson")
-                    && !id.equals("rschuetz");
+                    && !id.equals("acarpenter")
+                    && !id.equals("wghidotti")
+                    && !id.equals("zhuston");
         });
         List<LeaderboardItem> leaderboardItems = new ArrayList<>();
-        for (Player player : players) {
-            List<Score> playerScores = scoreService.getScoresByPlayer(player.getPlayerId());
+        for (PlayerSummaryDTO player : players) {
+            List<Score> playerScores = scoreService.getScoresByPlayer(player.playerId());
             LeaderboardItem leaderboardItem = new LeaderboardItem();
-            BigDecimal totalStrokesToPar = BigDecimal.ZERO;
+            int totalStrokesToPar = 0;
+            BigDecimal totalPoints = BigDecimal.ZERO;
             for (Score score : playerScores) {
-                totalStrokesToPar = totalStrokesToPar.add(BigDecimal.valueOf(score.getScoreToPar()));
+                totalStrokesToPar = totalStrokesToPar + score.getScoreToPar();
+                totalPoints = totalPoints.add(score.getPointsEarned());
             }
-            leaderboardItem.setFirstName(player.getPlayerFirstName());
-            leaderboardItem.setLastName(player.getPlayerLastName());
-            leaderboardItem.setCity(player.getPlayerCity());
-            leaderboardItem.setState(player.getPlayerState());
-            leaderboardItem.setTotalPoints(totalStrokesToPar);
+            leaderboardItem.setFirstName(player.playerFirstName());
+            leaderboardItem.setLastName(player.playerLastName());
+            leaderboardItem.setCity(player.playerCity());
+            leaderboardItem.setState(player.playerState());
+            leaderboardItem.setTotalPoints(totalPoints);
+            leaderboardItem.setStrokesToPar(totalStrokesToPar);
             //add item to list of leaderboard items to be rendered on page
             leaderboardItems.add(leaderboardItem);
         }

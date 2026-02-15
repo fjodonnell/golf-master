@@ -1,5 +1,6 @@
 package com.projects.golfmaster.controller;
 
+import com.projects.golfmaster.dto.PlayerSummaryDTO;
 import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Player;
 import com.projects.golfmaster.service.PlayerService;
@@ -15,12 +16,12 @@ public class PlayerController implements PlayerOperations{
     PlayerService playerService;
 
     @Override
-    public List<Player> getAllPlayers() {
+    public List<PlayerSummaryDTO> getAllPlayers() {
         return playerService.getAllPlayers();
     }
 
     @Override
-    public Player getPlayerById(String playerId) throws NotFoundException {
+    public PlayerSummaryDTO getPlayerById(String playerId) throws NotFoundException {
         return playerService.getPlayerById(playerId);
     }
 

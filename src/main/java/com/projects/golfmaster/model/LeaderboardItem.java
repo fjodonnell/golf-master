@@ -14,6 +14,7 @@ public class LeaderboardItem {
     private String city;
     private String state;
     private BigDecimal totalPoints;
+    private Integer strokesToPar;
 
 
 }

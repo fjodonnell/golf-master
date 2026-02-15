@@ -4,6 +4,9 @@ import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.Match;
 import com.projects.golfmaster.repository.MatchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -11,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@CacheConfig(cacheNames = "matches")
 @Service
 public class MatchService {
 
@@ -26,24 +30,31 @@ public class MatchService {
         return retrievedMatch.orElseThrow(() -> new NotFoundException("Match not Found"));
     }
 
+    @Cacheable
     public List<Match> getMatchesByEvent(String eventName) throws NotFoundException {
-        Optional<List<Match>> retrievedMatches = matchRepository.findByRound_Event_EventName(eventName);
-        //Unwrap the optional in order to sort
-        List<Match> matches = retrievedMatches.orElseThrow(() -> new NotFoundException("No matches found for the given event"));
+        List<Match> retrievedMatches = matchRepository.findByRound_Event_EventName(eventName);
+        if (retrievedMatches.isEmpty()){
+            throw new NotFoundException("No matches found for the given event");
+        }
         // Sort by Match.matchNumber ascending
-        matches.sort(Comparator.comparingInt(Match::getMatchNumber));
-        return matches;
+        retrievedMatches.sort(Comparator.comparingInt(Match::getMatchNumber));
+        return retrievedMatches;
     }
 
     public List<Match> getMatchesWonByTeam(String teamName) throws NotFoundException {
-        Optional<List<Match>> retrievedMatches = matchRepository.findByTeamWinner_TeamName(teamName);
-        return retrievedMatches.orElseThrow(() -> new NotFoundException("Your team has not won any matches"));
+        List<Match> retrievedMatches = matchRepository.findByTeamWinner_TeamName(teamName);
+        if (retrievedMatches.isEmpty()){
+            throw new NotFoundException("No matches found for the given team");
+        }
+        return retrievedMatches;
     }
 
+    @CacheEvict(allEntries = true)
     public Match createMatch(Match match) {
         return matchRepository.save(match);
     }
 
+    @CacheEvict(allEntries = true)
     public Match updateMatch(UUID matchId, Match match) throws NotFoundException {
         Optional<Match> retrievedMatch = matchRepository.findById(matchId);
         if (retrievedMatch.isPresent()) {
