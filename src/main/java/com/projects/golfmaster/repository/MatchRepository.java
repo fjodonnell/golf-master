@@ -15,7 +15,7 @@ public interface MatchRepository extends JpaRepository<Match, UUID> {
     List<Match> findByRound_Event_EventName(String eventName);
 
     @Query("""
-    SELECT DISTINCT m FROM matches m
+    SELECT DISTINCT m FROM Match m
     JOIN FETCH m.round r
     JOIN FETCH r.event e
     LEFT JOIN FETCH m.teamWinner tw

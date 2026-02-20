@@ -8,8 +8,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.List;
 
-@Entity(name = "teams")
-@Table
+@Entity
+@Table(name = "teams")
 @NoArgsConstructor
 @DynamicUpdate
 @Data

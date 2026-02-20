@@ -24,7 +24,7 @@ public interface PlayerRepository extends JpaRepository<Player, String>{
         p.playerAge,
         p.playerHandicap
     )
-    FROM players p
+    FROM Player p
 """)
     List<PlayerSummaryDTO> getAllPlayerSummaries();
 
@@ -39,7 +39,7 @@ public interface PlayerRepository extends JpaRepository<Player, String>{
         p.playerAge,
         p.playerHandicap
         )
-        FROM players p
+        FROM Player p
         WHERE p.playerId = :playerId
     """)
     Optional<PlayerSummaryDTO> getPlayerSummaryById(@Param("playerId") String playerId);
