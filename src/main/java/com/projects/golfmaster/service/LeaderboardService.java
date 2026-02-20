@@ -1,55 +1,59 @@
 package com.projects.golfmaster.service;
 
-import com.projects.golfmaster.dto.PlayerSummaryDTO;
 import com.projects.golfmaster.exception.NotFoundException;
 import com.projects.golfmaster.model.*;
+import com.projects.golfmaster.repository.ScoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class LeaderboardService {
-
-    private final PlayerService playerService;
     private final TeamService teamService;
-    private final ScoreService scoreService;
+    private final ScoreRepository scoreRepository;
     private final MatchService matchService;
 
 
-    public List<LeaderboardItem> getLeaderboardItems() throws NotFoundException {
-        List<PlayerSummaryDTO> players = playerService.getAllPlayers();
-        // Temporary code to remove players who are not in Tournament du Sol
-        players.removeIf(player -> {
-            String id = player.playerId();
-            return !id.equals("fjodonnell")
-                    && !id.equals("acarpenter")
-                    && !id.equals("wghidotti")
-                    && !id.equals("zhuston");
-        });
-        List<LeaderboardItem> leaderboardItems = new ArrayList<>();
-        for (PlayerSummaryDTO player : players) {
-            List<Score> playerScores = scoreService.getScoresByPlayer(player.playerId());
-            LeaderboardItem leaderboardItem = new LeaderboardItem();
-            int totalStrokesToPar = 0;
-            BigDecimal totalPoints = BigDecimal.ZERO;
-            for (Score score : playerScores) {
-                totalStrokesToPar = totalStrokesToPar + score.getScoreToPar();
-                totalPoints = totalPoints.add(score.getPointsEarned());
-            }
-            leaderboardItem.setFirstName(player.playerFirstName());
-            leaderboardItem.setLastName(player.playerLastName());
-            leaderboardItem.setCity(player.playerCity());
-            leaderboardItem.setState(player.playerState());
-            leaderboardItem.setTotalPoints(totalPoints);
-            leaderboardItem.setStrokesToPar(totalStrokesToPar);
-            //add item to list of leaderboard items to be rendered on page
-            leaderboardItems.add(leaderboardItem);
-        }
-        return leaderboardItems;
+    public List<LeaderboardItem> getLeaderboardItems() {
+        List<String> participantIds = List.of("fjodonnell", "acarpenter", "wghidotti", "zhuston");
+        String tournamentId = "d050abf9-a7b4-486b-a13f-85b112aa220f";
+
+        // 1. Fetch everything (Scores + Players) in 1 query
+        List<Score> scores = scoreRepository.findTournamentScoresWithPlayers(participantIds, tournamentId);
+
+        // 2. Group by Player and build the DTOs
+        return scores.stream()
+                .collect(Collectors.groupingBy(Score::getPlayer))
+                .entrySet().stream()
+                .map(entry -> {
+                    Player p = entry.getKey();
+                    List<Score> playerScores = entry.getValue();
+
+                    LeaderboardItem item = new LeaderboardItem();
+                    item.setFirstName(p.getPlayerFirstName());
+                    item.setLastName(p.getPlayerLastName());
+                    item.setCity(p.getPlayerCity());
+                    item.setState(p.getPlayerState());
+
+                    // Calculate totals from the list
+                    item.setStrokesToPar(playerScores.stream().mapToInt(Score::getScoreToPar).sum());
+                    item.setTotalPoints(playerScores.stream()
+                            .map(Score::getPointsEarned)
+                            .reduce(BigDecimal.ZERO, BigDecimal::add));
+
+                    return item;
+                })
+                // 1. Sort by points (reversed for descending order), then by strokes to par if needed
+                .sorted(Comparator.comparing(LeaderboardItem::getTotalPoints).reversed()
+                        .thenComparing(LeaderboardItem::getStrokesToPar))
+                // 2. Collect into the final list
+                .collect(Collectors.toList());
     }
 
     public List<LeaderboardItem> getTeamLeaderboardItems() throws NotFoundException {

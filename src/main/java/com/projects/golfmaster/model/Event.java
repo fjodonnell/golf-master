@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity(name = "events")
 @Table
@@ -15,6 +16,8 @@ import java.time.LocalDate;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.UUID)
+    private UUID eventId;
     private String eventName;
     private String eventLocation;
     private LocalDate eventStartDate;
