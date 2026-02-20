@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,7 +23,7 @@ public class LeaderboardService {
 
     public List<LeaderboardItem> getLeaderboardItems() {
         List<String> participantIds = List.of("fjodonnell", "acarpenter", "wghidotti", "zhuston");
-        String tournamentId = "d050abf9-a7b4-486b-a13f-85b112aa220f";
+        UUID tournamentId = UUID.fromString("d050abf9-a7b4-486b-a13f-85b112aa220f");
 
         // 1. Fetch scores with Player data pre-loaded
         List<Score> scores = scoreRepository.findTournamentScoresWithPlayers(participantIds, tournamentId);

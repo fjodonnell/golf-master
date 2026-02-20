@@ -26,6 +26,6 @@ public interface ScoreRepository extends JpaRepository<Score, UUID> {
             "AND s.round.event.eventId = :eventId")
     List<Score> findTournamentScoresWithPlayers(
             @Param("playerIds") List<String> playerIds,
-            @Param("eventId") String eventId
+            @Param("eventId") UUID eventId
     );
 }
