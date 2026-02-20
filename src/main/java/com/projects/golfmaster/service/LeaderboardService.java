@@ -23,10 +23,10 @@ public class LeaderboardService {
 
     public List<LeaderboardItem> getLeaderboardItems() {
         List<String> participantIds = List.of("fjodonnell", "acarpenter", "wghidotti", "zhuston");
-        UUID tournamentId = UUID.fromString("d050abf9-a7b4-486b-a13f-85b112aa220f");
+        String eventName = "Tournament du Sol";
 
         // 1. Fetch scores with Player data pre-loaded
-        List<Score> scores = scoreRepository.findTournamentScoresWithPlayers(participantIds, tournamentId);
+        List<Score> scores = scoreRepository.findTournamentScoresWithPlayers(participantIds, eventName);
 
         // 2. Safety check: If no scores yet, return empty list to keep frontend happy
         if (scores == null || scores.isEmpty()) {
