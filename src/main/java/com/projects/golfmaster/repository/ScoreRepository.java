@@ -21,7 +21,7 @@ public interface ScoreRepository extends JpaRepository<Score, UUID> {
 
     Optional<List<Score>> findByRound_Event_EventName(String eventName);
 
-    @Query("SELECT s FROM scores s JOIN FETCH s.player p " +
+    @Query("SELECT s FROM Score s JOIN FETCH s.player p " +
             "WHERE p.playerId IN :playerIds " +
             "AND s.round.event.eventId = :eventId")
     List<Score> findTournamentScoresWithPlayers(

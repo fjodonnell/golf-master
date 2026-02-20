@@ -9,8 +9,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity(name = "scores")
-@Table
+@Entity
+@Table(name = "scores")
 @NoArgsConstructor
 @DynamicUpdate
 @Data
