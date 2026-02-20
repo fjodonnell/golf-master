@@ -24,10 +24,15 @@ public class LeaderboardService {
         List<String> participantIds = List.of("fjodonnell", "acarpenter", "wghidotti", "zhuston");
         String tournamentId = "d050abf9-a7b4-486b-a13f-85b112aa220f";
 
-        // 1. Fetch everything (Scores + Players) in 1 query
+        // 1. Fetch scores with Player data pre-loaded
         List<Score> scores = scoreRepository.findTournamentScoresWithPlayers(participantIds, tournamentId);
 
-        // 2. Group by Player and build the DTOs
+        // 2. Safety check: If no scores yet, return empty list to keep frontend happy
+        if (scores == null || scores.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // 3. Group, Map, and Tie-Break Sort
         return scores.stream()
                 .collect(Collectors.groupingBy(Score::getPlayer))
                 .entrySet().stream()
@@ -41,18 +46,19 @@ public class LeaderboardService {
                     item.setCity(p.getPlayerCity());
                     item.setState(p.getPlayerState());
 
-                    // Calculate totals from the list
-                    item.setStrokesToPar(playerScores.stream().mapToInt(Score::getScoreToPar).sum());
-                    item.setTotalPoints(playerScores.stream()
+                    // Summing logic
+                    int totalStrokes = playerScores.stream().mapToInt(Score::getScoreToPar).sum();
+                    BigDecimal totalPoints = playerScores.stream()
                             .map(Score::getPointsEarned)
-                            .reduce(BigDecimal.ZERO, BigDecimal::add));
+                            .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+                    item.setStrokesToPar(totalStrokes);
+                    item.setTotalPoints(totalPoints);
                     return item;
                 })
-                // 1. Sort by points (reversed for descending order), then by strokes to par if needed
+                // 4. Sorting logic: Primary = Points (High to Low), Secondary = Strokes (Low to High)
                 .sorted(Comparator.comparing(LeaderboardItem::getTotalPoints).reversed()
                         .thenComparing(LeaderboardItem::getStrokesToPar))
-                // 2. Collect into the final list
                 .collect(Collectors.toList());
     }
 
