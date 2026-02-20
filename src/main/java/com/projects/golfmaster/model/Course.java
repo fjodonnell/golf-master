@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-@Entity(name = "courses")
-@Table
+@Entity
+@Table(name = "courses")
 @NoArgsConstructor
 @DynamicUpdate
 @Data

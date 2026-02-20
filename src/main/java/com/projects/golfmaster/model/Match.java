@@ -10,8 +10,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "matches")
-@Table
+@Entity
+@Table(name = "matches")
 @NoArgsConstructor
 @DynamicUpdate
 @Data

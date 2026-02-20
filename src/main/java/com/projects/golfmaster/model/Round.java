@@ -7,8 +7,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.UUID;
 
-@Entity(name = "rounds")
-@Table
+@Entity
+@Table(name = "rounds")
 @NoArgsConstructor
 @DynamicUpdate
 @Data

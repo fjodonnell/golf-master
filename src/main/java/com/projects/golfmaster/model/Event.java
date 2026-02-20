@@ -8,8 +8,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity(name = "events")
-@Table
+@Entity
+@Table(name = "events")
 @NoArgsConstructor
 @DynamicUpdate
 @Data
