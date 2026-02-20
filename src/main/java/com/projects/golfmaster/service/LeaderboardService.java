@@ -37,8 +37,10 @@ public class LeaderboardService {
             int totalStrokesToPar = 0;
             BigDecimal totalPoints = BigDecimal.ZERO;
             for (Score score : playerScores) {
-                totalStrokesToPar = totalStrokesToPar + score.getScoreToPar();
-                totalPoints = totalPoints.add(score.getPointsEarned());
+                if (("Tournament du Sol").equals(score.getRound().getEvent().getEventName())) {
+                    totalStrokesToPar = totalStrokesToPar + score.getScoreToPar();
+                    totalPoints = totalPoints.add(score.getPointsEarned());
+                }
             }
             leaderboardItem.setFirstName(player.playerFirstName());
             leaderboardItem.setLastName(player.playerLastName());
