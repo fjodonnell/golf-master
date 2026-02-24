@@ -37,7 +37,7 @@ public class LeaderboardService {
             int totalStrokesToPar = 0;
             BigDecimal totalPoints = BigDecimal.ZERO;
             for (Score score : playerScores) {
-                if (("Tournament du Sol").equals(score.getRound().getEvent().getEventName())) {
+                if (("Tournament du Sol 2026").equals(score.getRound().getEvent().getEventName())) {
                     totalStrokesToPar = totalStrokesToPar + score.getScoreToPar();
                     totalPoints = totalPoints.add(score.getPointsEarned());
                 }
